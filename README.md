@@ -10,4 +10,4 @@ The PyTorch C++ library (LibTorch) is installed with CocoaPods, run
 pod install
 ```
 
-Open '''HintsightFHE.xcworkspace``` to run demo. 
+Open ```HintsightFHE.xcworkspace``` in XCode to run demo. 
