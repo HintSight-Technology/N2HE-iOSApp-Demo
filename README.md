@@ -2,10 +2,10 @@
 
 ## Prerequisites 
 - Xcode >= 15.4
-- [CocoaPods](https://cocoapods.org)
+- iOS >= 17.5
 
 ## Installation 
-The PyTorch C++ library (LibTorch) is installed with CocoaPods, run 
+The PyTorch C++ library (LibTorch) is installed with [CocoaPods](https://cocoapods.org), run 
 ```
 pod install
 ```
