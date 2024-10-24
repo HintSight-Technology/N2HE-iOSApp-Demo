@@ -5,7 +5,7 @@
 - iOS >= 17.5
 - COCOAPODS (https://cocoapods.org). It can be installed via homebrew:
 ```
-sudo brew install cocoapods
+brew install cocoapods
 ```
 
 ## Installation 
