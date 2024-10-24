@@ -3,7 +3,10 @@
 ## Prerequisites 
 - Xcode >= 15.4
 - iOS >= 17.5
-- COCOAPODS (https://cocoapods.org)
+- COCOAPODS (https://cocoapods.org). It can be installed via homebrew:
+```
+sudo brew install cocoapods
+```
 
 ## Installation 
 The PyTorch C++ library (LibTorch) is installed with [CocoaPods](https://cocoapods.org), run 
@@ -11,4 +14,8 @@ The PyTorch C++ library (LibTorch) is installed with [CocoaPods](https://cocoapo
 pod install
 ```
 
-Open ```HintsightFHE.xcworkspace``` in XCode to run demo. 
+Open ```HintsightFHE.xcworkspace``` in XCode for the demo:
+```
+open HintsightFHE.xcworkspace
+```
+
