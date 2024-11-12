@@ -20,7 +20,7 @@ class FacialVerificationVC: UIViewController {
     var username: String = ""
     private let inputWidth: CGFloat = 160
     private let inputHeight: CGFloat = 160
-    private let baseUrl = "https://fr-demo-03.hintsight.com"
+    private let baseUrl = "<SERVER_URL>"
     private var extractor = FeatureExtractor()
     private var cancellables = Set<AnyCancellable>()
     
