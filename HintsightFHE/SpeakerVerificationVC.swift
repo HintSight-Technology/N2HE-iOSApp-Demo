@@ -21,7 +21,7 @@ class SpeakerVerificationVC: UIViewController, AVAudioRecorderDelegate {
     
     private let usernameTextField = HSTextField(text: "Enter your name here")
     private let timeTextView = HSTimerView(time: "00:05")
-    private let baseUrl = "https://fr-demo-03.hintsight.com"
+    private let baseUrl = "<SERVER_URL>"
     private let AUDIO_LEN_IN_SEC = 5
     private let SAMPLE_RATE = 16000
     private let extractor = SVFeatureExtractor()
