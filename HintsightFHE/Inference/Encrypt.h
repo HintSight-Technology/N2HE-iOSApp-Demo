@@ -185,8 +185,10 @@ vector<vector<int64_t>> vectorEnc(vector<int> pt_img_vector, string pk_file_path
     //network parameter
     const int l1 = 512;
 
-    //read rlwe public key
+    //read lwe secret key
     ifstream fin;
+
+    //read lwe public key
     fin.open(pk_file_path);
     vector<vector<int64_t>> pk(2, vector<int64_t>(n1,0));
     for (int i=0 ; i < 2 ; ++i) {
@@ -201,12 +203,8 @@ vector<vector<int64_t>> vectorEnc(vector<int> pt_img_vector, string pk_file_path
     for (int i = 0; i < l1; ++i) {
         input[i] = pt_img_vector[i];
     }
-    
-    CFTimeInterval startTime = CACurrentMediaTime();
     vector<vector<int64_t>> ct = RLWE64_Enc(input,pk,p1,q1);
-    CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
-    NSLog(@"encryption time:%f", elapsedTime);
-    
+
     return ct;
 }
 

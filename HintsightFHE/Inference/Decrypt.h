@@ -74,7 +74,9 @@ int64_t Decrypt(int64_t q, int64_t p, int n, const vector<int64_t>& c, const vec
 
 
 string audioResultDec(vector<int64_t> enc_result_vector, string file_path) {
+    // ======================== Initialization and Information Output ==========================
     srand(time(0));
+    //read_vector();
 
     //set n,q,t for RLWE scheme
     const int n1 = 1024; //2048;                        //polynomial degree
@@ -84,7 +86,7 @@ string audioResultDec(vector<int64_t> enc_result_vector, string file_path) {
     //network parameter
     const int l1 = 512;
 
-    //read RLWE secret key
+    //read LWE secret key
     ifstream fin;
     fin.open(file_path);
     vector<int> x(n1);
@@ -92,7 +94,7 @@ string audioResultDec(vector<int64_t> enc_result_vector, string file_path) {
         fin >> x[i];
     }
     fin.close();
-    cout << "read RLWE secret key." << endl;
+    cout << "read LWE secret key." << endl;
     
     //read encrypted result
     vector<int64_t> ct_ip1(n1+1, 0);
@@ -130,7 +132,9 @@ string audioResultDec(vector<int64_t> enc_result_vector, string file_path) {
 
 
 string imgResultDec(vector<int64_t> enc_result_vector, string file_path) {
-    srand(time(0));
+    // ======================== Initialization and Information Output ==========================
+    srand(static_cast<unsigned int>(time(0)));
+    //read_vector();
 
     //set n,q,t for RLWE scheme
     const int n1 = 1024; //2048;                        //polynomial degree
@@ -138,9 +142,9 @@ string imgResultDec(vector<int64_t> enc_result_vector, string file_path) {
     const int p1 = 6000; //12289;                       //plaintext modulus
 
     //network parameter
-    const int l1 = 512;
+//    const int l1 = 512;
 
-    //read RLWE secret key
+    //read LWE secret key
     ifstream fin;
     fin.open(file_path);
     vector<int> x(n1);
@@ -148,7 +152,7 @@ string imgResultDec(vector<int64_t> enc_result_vector, string file_path) {
         fin >> x[i];
     }
     fin.close();
-    cout << "read RLWE secret key." << endl;
+    cout << "read LWE secret key." << endl;
     
     //read encrypted result
     vector<int64_t> ct_ip1(n1+1, 0);
@@ -171,13 +175,16 @@ string imgResultDec(vector<int64_t> enc_result_vector, string file_path) {
     int64_t dec_ip2 = Decrypt(q1,p1,n1,ct_ip2,x);
     cout << "decryption result of ip2 = " << dec_ip2+bias2 << endl;
     
-    if (dec_ip1+bias1 < dec_ip2+bias2) {
-        string result = "yes";
-        return result;
-    } else {
-        string result = "no";
-        return result;
-    }
+    string result = to_string(dec_ip1+bias1) + "," + to_string(dec_ip2+bias2);
+    return result;
+    
+//    if (dec_ip1+bias1 < dec_ip2+bias2) {
+//        string result = "yes";
+//        return result;
+//    } else {
+//        string result = "no";
+//        return result;
+//    }
 }
 
 #endif /* Decrypt_h */

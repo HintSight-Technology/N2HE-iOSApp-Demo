@@ -1,5 +1,5 @@
 //
-//  InferenceModule.mm
+//  InferenceModule.m
 //  HintsightFHE
 //
 //  Created by Luo Kaiwen on 19/7/24.
@@ -74,7 +74,7 @@ const int encDim = 1024;
 
         for (int i = 0; i < [results count]; i++) {
             double t_ = [results[i] doubleValue];
-            cout << t_<< " ";
+//            cout << t_<< " ";
             double t = t_ / l2norm * scaler0;
 //            cout << t << " "; //print encrypted result vector
             
@@ -116,7 +116,7 @@ const int encDim = 1024;
     return nil;
 }
 
-- (NSString*)SVDecrpytVector:(NSArray<NSNumber*>*)encVector :(NSString*)filePath {
+- (NSString*)SVDecrpytVector:(NSArray<NSNumber*>*)encVector:(NSString*)filePath {
     try {
         string file_path = string([filePath UTF8String]);
         vector<int64_t> enc_vector;
@@ -139,7 +139,26 @@ const int encDim = 1024;
 }
 
 
-- (NSArray<NSArray<NSNumber*>*>*)imgFeatureExtract:(void*)imageBuffer:(NSString*)pkFilePath {
+- (NSArray<NSNumber*>*)imgFeatureExtract:(void*)imageBuffer {
+    at::Tensor tensorInput = torch::from_blob(imageBuffer, { 1, 3, inputHeight, inputWidth }, at::kFloat);
+    c10::InferenceMode guard;
+    auto tensorOutput = _impl.forward({ tensorInput }).toTensor();
+    
+    float* floatBuffer = tensorOutput.data_ptr<float>();
+    if (!floatBuffer) {
+        return nil;
+    }
+
+    NSMutableArray* results = [[NSMutableArray alloc] init];
+    for (int i = 0; i < outputDim; i++) {
+      [results addObject:@(floatBuffer[i])];
+    }
+    
+    return results;
+}
+
+
+- (NSArray<NSArray<NSNumber*>*>*)imgFeatureExtractandEnc:(void*)imageBuffer:(NSString*)pkFilePath {
     try {
         //exposes given data as Tensor without taking ownership of original data
         at::Tensor tensorInput = torch::from_blob(imageBuffer, { 1, 3, inputHeight, inputWidth }, at::kFloat);
@@ -189,7 +208,7 @@ const int encDim = 1024;
                 test_vector.push_back(tt);
             }
         }
-        cout << endl;
+//        cout << endl;
         
         string file_path = string([pkFilePath UTF8String]);
         
@@ -229,6 +248,11 @@ const int encDim = 1024;
         }
         
         string result = imgResultDec(enc_vector, file_path);
+//        NSMutableArray* output = [[NSMutableArray alloc] init];
+//        for (int i = 0; i < result.size(); i++) {
+//            NSNumber* value = @(result[0]);
+//            [output addObject:value]
+//        }
         NSString* match_result = [NSString stringWithUTF8String:result.c_str()];
         
         return match_result;

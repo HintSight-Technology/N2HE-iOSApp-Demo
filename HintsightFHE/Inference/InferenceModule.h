@@ -20,10 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString*)SVDecrpytVector:(NSArray<NSNumber*>*)encVector
                                    :(NSString*)filePath NS_SWIFT_NAME(audioDecrypt(vector:fileAtPath:));
 
-- (nullable NSArray<NSArray<NSNumber*>*>*)imgFeatureExtract:(void*)imageBuffer
-                                                           :(NSString*)pkFilePath NS_SWIFT_NAME(imgFeatureExtract(image:pkFilePath:));
+- (nullable NSArray<NSNumber*>*)imgFeatureExtract:(void*)imageBuffer NS_SWIFT_NAME(imgFeatureExtract(image:));
+- (nullable NSArray<NSArray<NSNumber*>*>*)imgFeatureExtractandEnc:(void*)imageBuffer
+                                                           :(NSString*)pkFilePath NS_SWIFT_NAME(imgFeatureExtractandEnc(image:pkFilePath:));
 - (nullable NSString*)FVDecrpytVector:(NSArray<NSNumber*>*)encVector
                                    :(NSString*)filePath NS_SWIFT_NAME(imgDecrypt(vector:fileAtPath:));
+//- (nullable NSArray<NSNumber*>*)FVDecrpytVector:(NSArray<NSNumber*>*)encVector
+//                                   :(NSString*)filePath NS_SWIFT_NAME(imgDecrypt(vector:fileAtPath:));
 
 @end
 
